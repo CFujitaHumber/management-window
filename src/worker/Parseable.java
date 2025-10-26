@@ -3,6 +3,8 @@
  */
 package worker;
 
+import java.text.ParseException;
+
 /**
  * Denotes an contract that can be parsed from string and back.
  */
@@ -14,7 +16,7 @@ public interface Parseable {
 	 * @return a {@link Parseable} instance
 	 * @see Parseable#toString()
 	 */
-	Parseable parse(String text);	
+	Parseable parse(String text) throws ParseException;	
 	
 	/**
 	 * Turns a {@link Parseable} instance
