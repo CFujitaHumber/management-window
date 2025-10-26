@@ -8,7 +8,7 @@ import java.text.ParseException;
 /**
  * Denotes a contract that defines the duty of a {@link Person}
  */
-public enum Role implements Parseable {
+public enum Role {
 	// Just to be extra safe going to override toString
 	// feels stupid.
 	Professor {
@@ -37,8 +37,7 @@ public enum Role implements Parseable {
 	 * @throws ParseException when there is no matching Role
 	 * @returns Role
 	 */
-	@Override
-	public Parseable parse(String text) throws ParseException {
+	public static Role parse(String text) throws ParseException {
 		// simple switch
 		switch(text) {
 		case "professor":
