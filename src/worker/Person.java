@@ -9,7 +9,7 @@ import java.util.Arrays;
 /**
  * Defines a contract of a person with their name, hours of work, and role within a company.
  */
-public class Person {
+public class Person{
 
 	/**
 	 * The name of this {@link Person}; full name.
@@ -61,13 +61,13 @@ public class Person {
 	 * @throws ParseException parsing failed
 	 * @throws NumberFormatException hour format is wrong
 	 */
-	public static Person parse(String text) throws ParseException, NumberFormatException {
+	public static Person parseString(String text) throws ParseException, NumberFormatException {
 		Person export = new Person();
-		//split by delimter
+		//split by delimiter
 		String[] tokens = text.split(Parseable.DELIMITER);
 		
 		// parse the first half.
-		export.role = Role.parse(tokens[0]);
+		export.role = Role.parseString(tokens[0]);
 		
 		// hours must be last
 		export.hours = Integer.parseInt(tokens[tokens.length-1]);
@@ -107,5 +107,7 @@ public class Person {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
+
 
 }

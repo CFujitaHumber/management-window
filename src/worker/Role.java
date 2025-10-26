@@ -37,7 +37,7 @@ public enum Role {
 	 * @throws ParseException when there is no matching Role
 	 * @returns Role
 	 */
-	public static Role parse(String text) throws ParseException {
+	public static Role parseString(String text) throws ParseException {
 		// simple switch
 		switch(text) {
 		case "professor":
