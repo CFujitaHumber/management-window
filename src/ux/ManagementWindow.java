@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -18,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import worker.Person;
+import worker.PersonBuilder;
 import worker.PrintHandler;
 import worker.Role;
 
@@ -55,6 +57,22 @@ public class ManagementWindow extends Application {
 	@Override
 	public void start(Stage primary) throws Exception {
 		load(primary);
+		errMessage.setText("Loading Complete");
+	
+		
+		//this is really ineffeceint
+		String data = "Data\n";
+		Iterator<Person> iterator = workingRegistry.getIterator();
+		System.out.print(iterator.toString());
+		
+		PersonBuilder builder = new PersonBuilder();
+			while(iterator.hasNext()) {				
+				builder.editPerson(iterator.next());
+				data = data + builder.toParsableString() + "\n";
+				//using this instead of toString since parsing is different
+			}
+		prvRecords.setText(data);
+		
 	}
 
 	//TODO move this
@@ -86,7 +104,7 @@ public class ManagementWindow extends Application {
 		txtName = new TextField();
 		txtRole = new TextField();
 		txtTotalHours = new TextField();
-		prvRecords = new Label();
+		prvRecords = new Label("Empty");
 	
 
 		VBox formItems = new VBox();
@@ -165,5 +183,13 @@ public class ManagementWindow extends Application {
 		Scene form = new Scene(formItems);
 		primary.setScene(form);
 	}
+	
+	@Override
+    public void stop() throws Exception {
+        System.out.println("Application is saving...");
+        printHandler.saveFrom(workingRegistry);
+        System.out.println("Application is closing...");
+        super.stop();
+    }
 
 }

@@ -62,7 +62,7 @@ public class PrintHandler<T extends Registry> {
 			
 			// everything between is the name, name should be split by the delimiter
 			builder.setName(String.join(PersonParser.DELIMITER, Arrays.copyOfRange(tokens, 1, tokens.length-1)));
-
+			registry.addPerson(builder);
 			builder.reset();
 		}
 		input.close();
@@ -74,10 +74,11 @@ public class PrintHandler<T extends Registry> {
 	 * @throws FileNotFoundException
 	 */
 	public void saveFrom(T registry) throws FileNotFoundException {
+		Iterator<Person> iterator = registry.getIterator();
 		try(PrintWriter writer = new PrintWriter(file)){
-			Iterator<Person> iterator = registry.getIterator();
 			while(iterator.hasNext()) {				
 				builder.editPerson(iterator.next());
+				System.out.println(builder.toParsableString());
 				//using this instead of toString since parsing is different
 				writer.println(builder.toParsableString());
 			}
