@@ -1,7 +1,7 @@
 /**
  * 
  */
-package worker;
+package ux;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,16 +17,35 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import worker.Person;
+import worker.PrintHandler;
+import worker.Role;
 
 /**
  * 
  */
 public class ManagementWindow extends Application {
 
-	private String PATH = "work_hours.txt";
+	/**
+	 * @author Carson Fujita
+	 * The path we use
+	 */
+	private static String PATH = "work_hours.txt";
+
+	/**
+	 * @author Carson Fujita
+	 * the registry printer
+	 */
+	private PrintHandler<WorkRegistry> printHandler;
 	
-	private PrintHandler registry;
 	
+	/**
+	 * @author Carson Fujita 
+	 * the registry manager and working
+	 */
+	private WorkRegistry workingRegistry = new WorkRegistry(new HashSet<Person>());
+	
+	//TODO MOVE these
 	private TextField txtName;
 	private TextField txtRole;
 	private TextField txtTotalHours;
@@ -37,7 +56,8 @@ public class ManagementWindow extends Application {
 	public void start(Stage primary) throws Exception {
 		load(primary);
 	}
-	
+
+	//TODO move this
 	public void load(Stage primary) {
 		errMessage = new Label("Loading...");
 		Scene loading = new Scene(errMessage, 200, 500);
@@ -52,15 +72,14 @@ public class ManagementWindow extends Application {
 		primary.setTitle("Loading");
 		primary.setScene(loading);
 		primary.show();
-	
+
 		//begin loading
-		registry = new PrintHandler(
-				new File(PATH),
-				new HashSet<Person>());
 		try {
-			registry.load();
-		} catch (NumberFormatException | FileNotFoundException | ParseException e) {
-			errMessage.setText(e.getMessage());
+			printHandler = new PrintHandler<WorkRegistry>(new File(ManagementWindow.PATH));
+			printHandler.loadTo(workingRegistry); //read file
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		// begin loading the next scene
@@ -77,7 +96,6 @@ public class ManagementWindow extends Application {
 		formItems.getChildren().add(txtTotalHours);
 		Button submit = new Button();
 		submit.setOnAction(new EventHandler<ActionEvent>(){
-
 			@Override
 			public void handle(ActionEvent event) {
 				//Store in heap? probbably not a good idea
