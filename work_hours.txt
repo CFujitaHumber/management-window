@@ -1,7 +1,7 @@
 professor Isaac Newton 4
 student Will Smith 4
 student Amy Adams 4
-professor John Steve Doe 6
-student Brad Pitt 6
-ta Marie Curie 6
 professor Dmitri Mendeleev 6
+ta Marie Curie 6
+student Brad Pitt 6
+professor John Steve Doe 6
