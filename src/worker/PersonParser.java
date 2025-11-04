@@ -38,4 +38,9 @@ public interface PersonParser {
 	 * @throws ParseException 
 	 */
 	void setRole(String role) throws ParseException;
+
+	/**
+	 * Returns this as a parsable String
+	 */
+	String toParsableString();
 }

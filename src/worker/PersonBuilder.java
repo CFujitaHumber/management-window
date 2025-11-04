@@ -69,6 +69,11 @@ public class PersonBuilder implements PersonParser {
 	public void reset() {
 		person = new Person();
 	}
-
-
+	
+	@Override
+	public String toParsableString() {
+		return person.getRole().toString() + Parseable.DELIMITER 
+				+ person.getName().toString() + Parseable.DELIMITER
+				+ person.getHours();
+	}
 }

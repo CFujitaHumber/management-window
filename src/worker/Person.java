@@ -36,53 +36,9 @@ public class Person{
 	private Role role;
 
 	/**
-	 * Only for the static factory 
-	 * @see Person#parse(String)
+	 * Instantiates a new empty {@link Person}
 	 */
-	private Person(){};
-
-	/**
-	 * Instantiates a new {@link Person}
-	 * @param role the specified role
-	 * @param name the specified name
-	 * @param hours the specified hours
-	 */
-	public Person(Role role, String name, int hours) {
-		this.role = role;
-		this.name = name;
-		this.hours = hours;
-	}
-
-	/**
-	 * Parses the name by reading the first string token as the {@link Person#role} the last token 
-	 * as the {@link Person#hours hours} and everything in-between as the {@link Name}
-	 * @param text the text to parse
-	 * @return a new person object
-	 * @throws ParseException parsing failed
-	 * @throws NumberFormatException hour format is wrong
-	 */
-	public static Person parseString(String text) throws ParseException, NumberFormatException {
-		Person export = new Person();
-		//split by delimiter
-		String[] tokens = text.split(Parseable.DELIMITER);
-		
-		// parse the first half.
-		export.role = Role.parseString(tokens[0]);
-		
-		// hours must be last
-		export.hours = Integer.parseInt(tokens[tokens.length-1]);
-		
-		// everything between is the name, name should be split by the delimiter
-		export.name = String.join(Parseable.DELIMITER, Arrays.copyOfRange(tokens, 1, tokens.length-1));
-		return export;
-	}
-
-	@Override
-	public String toString() {
-		return role.toString() + Parseable.DELIMITER 
-				+ name.toString() + Parseable.DELIMITER
-				+ Integer.toString(hours);
-	}
+	Person() {}
 
 	public String getName() {
 		return name;
@@ -107,7 +63,5 @@ public class Person{
 	public void setRole(Role role) {
 		this.role = role;
 	}
-
-
 
 }
