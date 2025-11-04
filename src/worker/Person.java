@@ -3,9 +3,6 @@
  */
 package worker;
 
-import java.text.ParseException;
-import java.util.Arrays;
-
 /**
  * Defines a contract of a person with their name, hours of work, and role within a company.
  */

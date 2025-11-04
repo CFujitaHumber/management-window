@@ -72,8 +72,13 @@ public class PersonBuilder implements PersonParser {
 	
 	@Override
 	public String toParsableString() {
-		return person.getRole().toString() + Parseable.DELIMITER 
-				+ person.getName().toString() + Parseable.DELIMITER
+		return person.getRole().toString() + PersonParser.DELIMITER 
+				+ person.getName().toString() + PersonParser.DELIMITER
 				+ person.getHours();
+	}
+
+	@Override
+	public void editPerson(Person person) {
+		this.person = person;
 	}
 }

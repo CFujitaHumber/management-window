@@ -40,6 +40,12 @@ public interface PersonParser {
 	void setRole(String role) throws ParseException;
 
 	/**
+	 * imports a person to change builder values
+	 * @param person
+	 */
+	void editPerson(Person person);
+
+	/**
 	 * Returns this as a parsable String
 	 */
 	String toParsableString();
