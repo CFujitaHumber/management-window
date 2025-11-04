@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -37,6 +38,14 @@ public class PrintHandler {
 				writer.println(iterator.next().toString());
 			}
 		}
+	}
+	
+	public String toString() {	
+		String output = "";
+		for(Person e: items){
+			output = output + e.toString() + "\n";
+		};
+		return output;
 	}
 
 }
